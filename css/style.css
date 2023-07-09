@@ -1,0 +1,24 @@
+h1 {
+    font-family: 'Courgette', cursive;
+}
+
+.page-container,
+#sketchboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-container {
+    flex-direction: column;
+}
+
+#sketchboard {
+    flex-wrap: wrap;
+    width: 360px;
+}
+
+.pixel {
+    padding: 10px;
+    border: 1px solid gray;
+}
