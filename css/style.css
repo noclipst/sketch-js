@@ -15,10 +15,15 @@ h1 {
 
 #sketchboard {
     flex-wrap: wrap;
-    width: 360px;
+    align-items: stretch;
+    width: 450px;
+    height: 450px;
+    margin-top: 50px;
+    box-sizing: border-box;
 }
 
 .pixel {
-    padding: 10px;
+    padding: 13px;
     border: 1px solid gray;
+    margin: 0px;
 }

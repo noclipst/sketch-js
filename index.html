@@ -15,8 +15,14 @@
         <div class="page-container">
             <h1>Etch-A-Sketch</h1>
 
-            <div id="sketchboard">
-
+            <div class="sketch">
+                <div id="sketch-controls">
+                    <div class="size-slider">
+                        <input type="range" min="1" max="100" value="16" class="slider" id="board-size-slider">
+                        <p id="board-size-slider-text">Grid size: 16 x 16</p>
+                    </div>
+                </div>
+                <div id="sketchboard"></div>
             </div>
         </div>
     </body>
