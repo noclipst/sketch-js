@@ -4,7 +4,7 @@ const sketchboard = document.getElementById('sketchboard');
 const boardSizeSlider = document.getElementById('board-size-slider');
 const boardSizeText = document.getElementById('board-size-slider-text');
 const boardWidth = 500; // board width in pixels
-generateBoard(256, 16); // default value, 16x16
+generateBoard(256, 31.25); // default board size (grid 16x16) and pixel width and height for that size
 
 const pixels = document.querySelectorAll('.pixel');
 
@@ -16,17 +16,16 @@ boardSizeSlider.addEventListener("input", (e) => {
     const sliderValue = e.target.value;
 
     clearBoard();
-    generateBoard((sliderValue * sliderValue), sliderValue); // the first parameter is the total board size, the second is used to calculate each div's size when resizing the board
+    generateBoard((sliderValue * sliderValue), (boardWidth / sliderValue)); // the first parameter is the total board size, the second is width and height of each pixel for the given slider value
     boardSizeText.textContent = `Grid size: ${sliderValue} x ${sliderValue}`;
     updatePixelEventListeners(); // once the board is regenerated the mouseover event listener no longer works; needs updating
 })
 
 // -------------------------
 
-function generateBoard(totalBoardSize, sliderValue) {
+function generateBoard(totalBoardSize, divSideSize) {
     for (i = 0; i < totalBoardSize; i += 1) {
         const div = document.createElement('div');
-        const divSideSize = boardWidth / sliderValue;
 
         div.className = 'pixel';
         div.id = `pixel-${i + 1}`;
