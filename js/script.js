@@ -3,8 +3,8 @@
 const sketchboard = document.getElementById('sketchboard');
 const boardSizeSlider = document.getElementById('board-size-slider');
 const boardSizeText = document.getElementById('board-size-slider-text');
-
-generateBoard(256); // default value, 16x16
+const boardWidth = 500; // board width in pixels
+generateBoard(256, 16); // default value, 16x16
 
 const pixels = document.querySelectorAll('.pixel');
 
@@ -16,19 +16,22 @@ boardSizeSlider.addEventListener("input", (e) => {
     const sliderValue = e.target.value;
 
     clearBoard();
-    generateBoard(sliderValue * sliderValue);
+    generateBoard((sliderValue * sliderValue), sliderValue); // the first parameter is the total board size, the second is used to calculate each div's size when resizing the board
     boardSizeText.textContent = `Grid size: ${sliderValue} x ${sliderValue}`;
-    resizePixels(sliderValue);
     updatePixelEventListeners(); // once the board is regenerated the mouseover event listener no longer works; needs updating
 })
 
 // -------------------------
 
-function generateBoard(size) {
-    for (i = 0; i < size; i += 1) {
+function generateBoard(totalBoardSize, sliderValue) {
+    for (i = 0; i < totalBoardSize; i += 1) {
         const div = document.createElement('div');
+        const divSideSize = boardWidth / sliderValue;
+
         div.className = 'pixel';
-        div.id = `pixel-${i}`;
+        div.id = `pixel-${i + 1}`;
+        div.style.height = `${divSideSize}px`;
+        div.style.width = `${divSideSize}px`;
         sketchboard.appendChild(div);
         console.log(`Generated pixel number ${i + 1}`);
     }
@@ -49,13 +52,4 @@ function updatePixelEventListeners() {
     const pixels = document.querySelectorAll('.pixel');
 
     pixels.forEach(pixel => pixel.addEventListener('mouseover', () => changePixelColor(pixel)));
-}
-
-function resizePixels(boardSize) {
-    const pixelDiv = document.querySelectorAll('.pixel');
-    const sketchboardDivWidth = 450; 
-
-    const pixelWidth = sketchboardDivWidth / boardSize;
-    
-    pixelDiv.forEach(pixel => pixel.style.padding = pixelWidth);
 }
