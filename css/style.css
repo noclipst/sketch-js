@@ -3,6 +3,7 @@ h1 {
 }
 
 .page-container,
+.sketch,
 #sketchboard {
     display: flex;
     justify-content: center;
@@ -20,11 +21,17 @@ h1 {
     margin-top: 50px;
     align-content: flex-start;
     padding: 0px;
-    box-sizing: border-box;
+    border: 1px solid #CCCCCC;
 }
 
 .pixel {
     border: 1px solid #CCCCCC;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.pixel_nogrid {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
