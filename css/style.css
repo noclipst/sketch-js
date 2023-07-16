@@ -15,7 +15,8 @@ button {
 }
 
 .random-color-button_clicked,
-.rainbow-button_clicked {
+.rainbow-button_clicked,
+.erase-pixel-button_clicked {
     background-color: #292221;
     color: white;
 }
