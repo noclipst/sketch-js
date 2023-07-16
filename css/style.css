@@ -71,6 +71,7 @@ button {
     align-content: flex-start;
     padding: 0px;
     border: 1px solid #CCCCCC;
+    box-shadow: 5px 5px 10px #CCCCCC;
 }
 
 .pixel {
