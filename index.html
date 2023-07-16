@@ -22,12 +22,15 @@
                         <p id="board-size-slider-text">Grid size: 16 x 16</p>
                     </div>
 
-                    <input type="checkbox" checked="checked" id="show-grid-checkbox" name="show-grid" value="true">
-                    <label for="show-grid-checkbox">Display grid</label>
-
+                    <div class="show-grid-checkbox">
+                        <input type="checkbox" checked="checked" id="show-grid-checkbox" name="show-grid" value="true">
+                        <label for="show-grid-checkbox">Display grid</label>   
                     </div>
+
+                    <button type="button" id="rainbow-button">Rainbow</button>
+                    <button type="button" id="random-color-button">Random color</button>
                 </div>
-                <div id="sketchboard"></div>
+                <div class="board" id="sketchboard"></div>
             </div>
         </div>
     </body>

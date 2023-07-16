@@ -2,8 +2,27 @@ h1 {
     font-family: 'Courgette', cursive;
 }
 
+input,
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+button {
+    width: 130px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+.random-color-button_clicked,
+.rainbow-button_clicked {
+    background-color: #292221;
+    color: white;
+}
+
 .page-container,
 .sketch,
+.show-grid-checkbox,
 #sketchboard {
     display: flex;
     justify-content: center;
@@ -12,6 +31,27 @@ h1 {
 
 .page-container {
     flex-direction: column;
+}
+
+.sketch {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.show-grid-checkbox {
+    gap: 5px;
+}
+
+#sketch-controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 50px;
 }
 
 #sketchboard {
