@@ -1,5 +1,5 @@
 # sketch-js
-![a screenshot of a completed etch-a-sketch project](github/etch a sketch.png)
+![a screenshot of a completed etch-a-sketch project](screenshot.png)
 
 This is a simple Etch-A-Sketch page.
 
