@@ -14,6 +14,16 @@ button {
     box-sizing: border-box;
 }
 
+.description {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    width: 670px;
+    margin-bottom: 50px;
+}
+
 .random-color-button_clicked,
 .rainbow-button_clicked,
 .erase-pixel-button_clicked {
@@ -52,14 +62,12 @@ button {
     align-items: flex-start;
     flex-direction: column;
     gap: 20px;
-    margin-top: 50px;
 }
 
 #sketchboard {
     flex-wrap: wrap;
     width: 500px;
     height: 500px;
-    margin-top: 50px;
     align-content: flex-start;
     padding: 0px;
     border: 1px solid #CCCCCC;

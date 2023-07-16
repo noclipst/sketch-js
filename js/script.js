@@ -7,9 +7,9 @@ const randomColorBtn = document.getElementById('random-color-button');
 const resetBoardBtn = document.getElementById('clear-board-button');
 const erasePixelBtn = document.getElementById('erase-pixel-button');
 
-const boardWidth = 500; // width in pixels
-const initialBoardSize = 256; // default board size
-const initialPixelSize = 31.25; // and pixel width and height for that size
+const boardWidthPx = 500;
+const initialBoardSize = 256;
+const initialPixelSize = 31.25;
 
 let isRainbowModeActive = false;
 let isRandomColorModeActive = false;
@@ -22,36 +22,30 @@ const pixels = document.querySelectorAll('.pixel');
 
 // -------------  event listeners  ---------------
 
-sketchboard.addEventListener('mousedown', () => { // supposed to fix dragging behavior on the board
-    isMousePressed = true;
-});
+sketchboard.addEventListener('mousedown', () => (isMousePressed = true));
 
-sketchboard.addEventListener('mouseup', () => { // supposed to fix dragging behavior on the board
-    isMousePressed = false;
-});
+sketchboard.addEventListener('mouseup', () => (isMousePressed = false));
 
 pixels.forEach(pixel => {
-    pixel.addEventListener('mouseover', () => { // supposed to fix dragging behavior on the board
+    pixel.addEventListener('mouseover', () => {
       if (isMousePressed) {
         changePixelColor(pixel);
       }
     });
 });
 
-sketchboard.addEventListener('dragstart', (e) => { // supposed to fix dragging behavior on the board
-    e.preventDefault();
-});
+sketchboard.addEventListener('dragstart', (e) => (e.preventDefault()));
 
-boardSizeSlider.addEventListener("input", (e) => { // handles board size slider
+boardSizeSlider.addEventListener("input", (e) => {
     const sliderValue = e.target.value;
 
     clearBoard();
-    generateBoard((sliderValue * sliderValue), (boardWidth / sliderValue)); // the first parameter is the total board size, the second is width and height of each pixel for the given slider value
+    generateBoard((sliderValue * sliderValue), (boardWidthPx / sliderValue));
     boardSizeText.textContent = `Grid size: ${sliderValue} x ${sliderValue}`;
     updatePixelEventListeners(); // once the board is regenerated all the pixel event listeners stop working, need updating
 })
 
-showGridCheckbox.addEventListener("input", function() { // handles show/hide grid functionality
+showGridCheckbox.addEventListener("input", function() {
     if (this.checked) {
         pixels.forEach(pixel => {
             pixel.classList.add('pixel');
@@ -65,20 +59,20 @@ showGridCheckbox.addEventListener("input", function() { // handles show/hide gri
     }
 })
 
-rainbowBtn.addEventListener('click', () => { // handles random color button
+rainbowBtn.addEventListener('click', () => {
     if (isRainbowModeActive) {
         isRainbowModeActive = false;
         rainbowBtn.classList.remove('rainbow-button_clicked');
     } else {
         isRainbowModeActive = true;
         isRandomColorModeActive = false;
-        isErasePixelModeActive = false; // ensures that these three modes are mutually exclusive
+        isErasePixelModeActive = false;
 
-        if (randomColorBtn.classList.contains('random-color-button_clicked')) { // deselects the other button
+        if (randomColorBtn.classList.contains('random-color-button_clicked')) {
             randomColorBtn.classList.remove('random-color-button_clicked');
         }
 
-        if (erasePixelBtn.classList.contains('erase-pixel-button_clicked')) { // deselects the other button
+        if (erasePixelBtn.classList.contains('erase-pixel-button_clicked')) {
             erasePixelBtn.classList.remove('erase-pixel-button_clicked');
         }
 
@@ -86,20 +80,20 @@ rainbowBtn.addEventListener('click', () => { // handles random color button
     }
 })
 
-randomColorBtn.addEventListener('click', () => { // handles rainbow color button
+randomColorBtn.addEventListener('click', () => {
     if (isRandomColorModeActive) {
         isRandomColorModeActive = false;
         randomColorBtn.classList.remove('random-color-button_clicked');
     } else {
         isRandomColorModeActive = true;
         isRainbowModeActive = false;
-        isErasePixelModeActive = false; // ensures that these three modes are mutually exclusive
+        isErasePixelModeActive = false;
 
-        if (rainbowBtn.classList.contains('rainbow-button_clicked')) { // deselects the other button
+        if (rainbowBtn.classList.contains('rainbow-button_clicked')) {
             rainbowBtn.classList.remove('rainbow-button_clicked');
         }
 
-        if (erasePixelBtn.classList.contains('erase-pixel-button_clicked')) { // deselects the other button
+        if (erasePixelBtn.classList.contains('erase-pixel-button_clicked')) {
             erasePixelBtn.classList.remove('erase-pixel-button_clicked');
         }
 
@@ -107,20 +101,20 @@ randomColorBtn.addEventListener('click', () => { // handles rainbow color button
     }
 })
 
-erasePixelBtn.addEventListener('click', () => { // handles erase pixel button
+erasePixelBtn.addEventListener('click', () => {
     if (isErasePixelModeActive) {
         isErasePixelModeActive = false;
         erasePixelBtn.classList.remove('erase-pixel-button_clicked');
     } else {
         isErasePixelModeActive = true;
         isRainbowModeActive = false;
-        isRandomColorModeActive = false // ensures that these three modes are mutually exclusive
+        isRandomColorModeActive = false
 
-        if (rainbowBtn.classList.contains('rainbow-button_clicked')) { // deselects the other button
+        if (rainbowBtn.classList.contains('rainbow-button_clicked')) {
             rainbowBtn.classList.remove('rainbow-button_clicked');
         }
 
-        if (randomColorBtn.classList.contains('random-color-button_clicked')) { // deselects the other button
+        if (randomColorBtn.classList.contains('random-color-button_clicked')) {
             randomColorBtn.classList.remove('random-color-button_clicked');
         }
 
@@ -150,31 +144,18 @@ function changePixelColor(pixel) {
     if (isErasePixelModeActive) {
         pixel.style.backgroundColor = 'white';
     } else if (isRainbowModeActive) {
-        const color = Math.floor(Math.random() * 7);
-
-        switch (color) {
-            case 0: 
-                pixel.style.backgroundColor = 'violet';
-                break;
-            case 1: 
-                pixel.style.backgroundColor = 'indigo';
-                break;
-            case 2: 
-                pixel.style.backgroundColor = 'blue';
-                break;
-            case 3: 
-                pixel.style.backgroundColor = 'green';
-                break;
-            case 4: 
-                pixel.style.backgroundColor = 'yellow';
-                break;
-            case 5: 
-                pixel.style.backgroundColor = 'orange';
-                break;
-            case 6: 
-                pixel.style.backgroundColor = 'red';
-                break;
+        const colorNumber = Math.floor(Math.random() * 7);
+        const pixelColorConfig = {
+            [0]: "violet",
+            [1]: "indigo",
+            [2]: "blue",
+            [3]: "green",
+            [4]: "yellow",
+            [5]: "orange",
+            [6]: "red",
         }
+
+        pixel.style.backgroundColor = pixelColorConfig[colorNumber];
     } else if (isRandomColorModeActive) {
         pixel.style.backgroundColor = `rgb(${getRandomRgbValue()}, ${getRandomRgbValue()}, ${getRandomRgbValue()})`;
     } else {
@@ -183,22 +164,11 @@ function changePixelColor(pixel) {
 }
 
 function clearBoard() {
-    while (sketchboard.firstChild) {
-        sketchboard.removeChild(sketchboard.firstChild);
-    }
+    sketchboard.replaceChildren();
 }
 
 function updatePixelEventListeners() {
     const pixels = document.querySelectorAll('.pixel');
-
-
-    sketchboard.addEventListener('mousedown', () => {
-        isMousePressed = true;
-    });
-    
-    sketchboard.addEventListener('mouseup', () => {
-        isMousePressed = false;
-    });
     
     pixels.forEach(pixel => {
         pixel.addEventListener('mouseover', () => {
@@ -208,9 +178,7 @@ function updatePixelEventListeners() {
         });
     });
     
-    sketchboard.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-    });
+    sketchboard.addEventListener('dragstart', (e) => (e.preventDefault()));
 
     showGridCheckbox.addEventListener("input", function() {
         if (this.checked) {
