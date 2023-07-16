@@ -1,5 +1,3 @@
-// TODO: change the code so that it reacts to mousehold, not mousehover
-
 const sketchboard = document.getElementById('sketchboard');
 const boardSizeSlider = document.getElementById('board-size-slider');
 const boardSizeText = document.getElementById('board-size-slider-text');
@@ -22,25 +20,25 @@ generateBoard(initialBoardSize, initialPixelSize);
 
 const pixels = document.querySelectorAll('.pixel');
 
-// ---  event listeners  ---
+// -------------  event listeners  ---------------
 
-sketchboard.addEventListener('mousedown', () => {
+sketchboard.addEventListener('mousedown', () => { // supposed to fix dragging behavior on the board
     isMousePressed = true;
 });
 
-sketchboard.addEventListener('mouseup', () => {
+sketchboard.addEventListener('mouseup', () => { // supposed to fix dragging behavior on the board
     isMousePressed = false;
 });
 
 pixels.forEach(pixel => {
-    pixel.addEventListener('mouseover', () => {
+    pixel.addEventListener('mouseover', () => { // supposed to fix dragging behavior on the board
       if (isMousePressed) {
         changePixelColor(pixel);
       }
     });
 });
 
-sketchboard.addEventListener('dragstart', (e) => {
+sketchboard.addEventListener('dragstart', (e) => { // supposed to fix dragging behavior on the board
     e.preventDefault();
 });
 
@@ -109,7 +107,7 @@ randomColorBtn.addEventListener('click', () => { // handles rainbow color button
     }
 })
 
-erasePixelBtn.addEventListener('click', () => {
+erasePixelBtn.addEventListener('click', () => { // handles erase pixel button
     if (isErasePixelModeActive) {
         isErasePixelModeActive = false;
         erasePixelBtn.classList.remove('erase-pixel-button_clicked');
